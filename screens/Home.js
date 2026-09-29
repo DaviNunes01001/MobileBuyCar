@@ -2,6 +2,8 @@ import { Pressable, StyleSheet, Text, View} from 'react-native';
 
 
 export default function Home({ navigation }) {
+
+  
   return (
     <View style={styles.container}>   
       <Text style={styles.title}>Carrinho de compra</Text>

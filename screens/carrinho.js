@@ -1,30 +1,62 @@
 import { useState } from "react";
-import {TextInput, Pressable, StyleSheet, Text, View } from "react-native";
+import { TextInput, Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function Carrinho({ navigation }) {
+  const [produto, setProduto] = useState([]);
+  const [texto, setTexto] = useState("");
+
+  function AddnewProd() {
+    if (!texto.trim()) return;
+
+    const NewProd = {
+      id: Date.now(),
+      name: texto,
+    };
+
+    const novaLista = [...produto, NewProd];
+
+    setProduto(novaLista);
+    setTexto("");
+  }
+
+  function deleteProd(id) {
+    const novaLista = produto.filter((produto) => produto.id !== id)
+    setProduto(novaLista)
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Carrinho</Text>
       </View>
-      
+
       <View style={styles.Cont_two}>
-        <TextInput style={styles.input}
-        placeholder="Digite um produto"
-        ></TextInput>
-        <View style={styles.block}>
-          <Text style={styles.nameProd}>Name</Text>
-          <Pressable style={styles.ButtonExcluir}>
-            <Text>Excluir</Text>
+        <View style={styles.areaInput}>
+          <TextInput
+            style={styles.input}
+            value={texto}
+            onChangeText={setTexto}
+            placeholder="Digite um produto"
+          ></TextInput>
+          <Pressable style={styles.ButtonAdd} onPress={AddnewProd}>
+            <Text>Adicionar Produto</Text>
           </Pressable>
         </View>
+        {produto.map((item) => (
+          <View style={styles.block} key={item.id}>
+            <Text style={styles.nameProd}>{item.name}</Text>
+
+            <Pressable onPress={() => deleteProd(item.id)} style={styles.ButtonExcluir}>
+              <Text >Excluir</Text>
+            </Pressable>
+          </View>
+        ))}
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
   // Tela inteira
   container: {
     flex: 1,
@@ -113,5 +145,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
   },
-
+  ButtonAdd: {
+    padding: 8,
+    backgroundColor: "#aca7e6",
+    borderRadius: 10,
+    marginRight: 10,
+    width: 130,
+  },
 });
