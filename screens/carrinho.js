@@ -24,6 +24,11 @@ export default function Carrinho({ navigation }) {
     setProduto(novaLista)
   }
 
+  function DeletarAll() {
+    setProduto([])
+  }
+
+ const contador = produto.length
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -38,9 +43,15 @@ export default function Carrinho({ navigation }) {
             onChangeText={setTexto}
             placeholder="Digite um produto"
           ></TextInput>
+          <View style={styles.areaButtons}>
           <Pressable style={styles.ButtonAdd} onPress={AddnewProd}>
             <Text>Adicionar Produto</Text>
           </Pressable>
+          <Pressable style={styles.ButtonDeleteAll} onPress={DeletarAll}>
+            <Text>Deletar todos os Produto</Text>
+          </Pressable>
+          </View>
+          <Text style={styles.contadorName}>Produtos: {contador}</Text>
         </View>
         {produto.map((item) => (
           <View style={styles.block} key={item.id}>
@@ -70,12 +81,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  areaButtons: {
+    flex: 1,
+    justifyContent:"space-between",
+    alignItems:"center",
+    flexDirection:"row",
+  },
 
   // Título
   title: {
     fontSize: 28,
     fontWeight: "bold",
     color: "#ffffff",
+  },
+  contadorName: {
+    fontSize:20,
+    backgroundColor: "white",
+    padding:10,
+    marginTop: 10,
+    width: "40%",
+    borderRadius: 20
   },
 
   // Área dos produtos
@@ -108,7 +133,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 60,
 
-    backgroundColor: "#c3cbdb",
+    backgroundColor: "#f5f6f7",
 
     marginTop: 10,
 
@@ -151,5 +176,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginRight: 10,
     width: 130,
+  },
+  ButtonDeleteAll: {
+    padding: 8,
+    backgroundColor: "#f04d4d",
+    borderRadius: 10,
+    marginRight: 10,
+    width: 170,
+    marginTop: 10
   },
 });
