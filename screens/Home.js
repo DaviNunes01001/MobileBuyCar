@@ -1,22 +1,16 @@
-import { Pressable, StyleSheet, Text, View, Image} from 'react-native';
+import { Pressable, StyleSheet, Text, View} from 'react-native';
 
 
-export default function Home({ navigation, contador }) {
+export default function Home({ navigation }) {
   return (
-    <View style={styles.container}>
-        <Image source={require("../assets/carjpg.jpg")}
-        style={styles.img}/>    
-      <Text style={styles.title}>Biscoito da Sorte</Text>
-      <Text style={styles.subtitle}>Descubra uma mensagem especial para o seu dia.</Text>
-      <Text style={styles.counter}>Cliques: {contador}</Text>
-
-    
-
+    <View style={styles.container}>   
+      <Text style={styles.title}>Carrinho de compra</Text>
+  
       <Pressable
         style={styles.button}
-        onPress={() => navigation.navigate('Biscoito')}
+        onPress={() => navigation.navigate('Carrinho')}
       >
-        <Text style={styles.buttonText}>Ir para Biscoito</Text>
+        <Text style={styles.buttonText}>Ir para Carrinho de compras</Text>
       </Pressable>
     </View>
   );
